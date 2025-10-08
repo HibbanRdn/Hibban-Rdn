@@ -6,24 +6,24 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function Projects() {
   const projects = [
-    {
-      title: "Machine Learning Models",
-      description: "Advanced ML models for predictive analytics and pattern recognition using TensorFlow and scikit-learn.",
-      tags: ["Python", "TensorFlow", "scikit-learn"],
-      image: "https://images.unsplash.com/photo-1717501219263-9aa2d6a768d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWNoaW5lJTIwbGVhcm5pbmclMjBuZXVyYWwlMjBuZXR3b3JrfGVufDF8fHx8MTc1OTgyMjc3NHww&ixlib=rb-4.1.0&q=80&w=1080",
-    },
-    {
-      title: "Data Mining Analysis",
-      description: "Comprehensive data mining project analyzing large datasets to extract valuable insights and trends.",
-      tags: ["Python", "Pandas", "Data Analysis"],
-      image: "https://images.unsplash.com/photo-1740908900846-4bbd4f22c975?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhJTIwbWluaW5nJTIwYW5hbHlzaXN8ZW58MXx8fHwxNzU5OTEzNDYxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    },
-    {
-      title: "Neural Networks Experiments",
-      description: "Deep learning experiments with various neural network architectures for image and text processing.",
-      tags: ["Deep Learning", "PyTorch", "CNN"],
-      image: "https://images.unsplash.com/photo-1719550371336-7bb64b5cacfa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZXVyYWwlMjBuZXR3b3JrJTIwYnJhaW58ZW58MXx8fHwxNzU5ODQ1NjExfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    },
+    // {
+    //   title: "Machine Learning Models",
+    //   description: "Advanced ML models for predictive analytics and pattern recognition using TensorFlow and scikit-learn.",
+    //   tags: ["Python", "TensorFlow", "scikit-learn"],
+    //   image: "https://images.unsplash.com/photo-1717501219263-9aa2d6a768d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWNoaW5lJTIwbGVhcm5pbmclMjBuZXVyYWwlMjBuZXR3b3JrfGVufDF8fHx8MTc1OTgyMjc3NHww&ixlib=rb-4.1.0&q=80&w=1080",
+    // },
+    // {
+    //   title: "Data Mining Analysis",
+    //   description: "Comprehensive data mining project analyzing large datasets to extract valuable insights and trends.",
+    //   tags: ["Python", "Pandas", "Data Analysis"],
+    //   image: "https://images.unsplash.com/photo-1740908900846-4bbd4f22c975?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhJTIwbWluaW5nJTIwYW5hbHlzaXN8ZW58MXx8fHwxNzU5OTEzNDYxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    // },
+    // {
+    //   title: "Neural Networks Experiments",
+    //   description: "Deep learning experiments with various neural network architectures for image and text processing.",
+    //   tags: ["Deep Learning", "PyTorch", "CNN"],
+    //   image: "https://images.unsplash.com/photo-1719550371336-7bb64b5cacfa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZXVyYWwlMjBuZXR3b3JrJTIwYnJhaW58ZW58MXx8fHwxNzU5ODQ1NjExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    // },
     {
       title: "GlucoSense",
       description: "Embedded system project for real-time blood sugar monitoring using sensors and microcontrollers.",
