@@ -1,11 +1,13 @@
 import { motion } from "motion/react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { GraduationCap, MapPin, Calendar, Award } from "lucide-react";
+import { MapPin, Calendar, Award } from "lucide-react";
 
 export function Education() {
   const education = [
     {
+      logo: "/logos/unila.png",
+      logoSize: "h-16 w-16", // ukuran spesifik
       degree: "Bachelor of Computer Science",
       institution: "Universitas Lampung",
       location: "Lampung, Indonesia",
@@ -27,6 +29,8 @@ export function Education() {
       ],
     },
     {
+      logo: "/logos/smansa.png",
+      logoSize: "h-16 w-16", // ukuran spesifik
       degree: "Senior High School (SMA)",
       institution: "SMA Negeri 1 Metro",
       location: "Metro, Indonesia",
@@ -49,17 +53,20 @@ export function Education() {
   ];
 
   return (
-    <section id="education" className="py-20 px-4 bg-card/30 relative overflow-hidden">
+    <section
+      id="education"
+      className="py-24 px-4 bg-card/30 relative overflow-hidden"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(57,255,20,0.05),transparent_50%)]" />
-      
+
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
           <h2 className="mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Education
@@ -69,7 +76,7 @@ export function Education() {
           </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto space-y-16">
           {education.map((edu, index) => (
             <motion.div
               key={edu.degree + edu.institution}
@@ -77,25 +84,31 @@ export function Education() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="mb-10"
             >
-              <Card className="p-8 bg-card/50 backdrop-blur-sm border border-primary/20 hover:border-primary/50 transition-all duration-300 shadow-lg hover:shadow-primary/20 hover:shadow-xl">
+              <Card className="p-8 bg-card/50 backdrop-blur-sm border border-primary/20 hover:border-primary/50 transition-all duration-300 shadow-lg hover:shadow-primary/20 hover:shadow-xl rounded-2xl">
                 {/* Header */}
-                <div className="flex items-start gap-4 mb-6">
+                <div className="flex items-start gap-6 mb-6">
                   <motion.div
-                    whileHover={{ scale: 1.1, y: -3 }}
-                    transition={{ duration: 0.3 }}
-                    className="p-4 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl"
-                    style={{
-                      boxShadow: "0 0 20px rgba(0, 255, 255, 0.2)",
+                    whileHover={{
+                      scale: 1.08,
+                      y: -3,
+                      boxShadow: "0 0 30px rgba(0, 255, 255, 0.4)",
                     }}
+                    transition={{ duration: 0.3 }}
+                    className="p-3 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl"
                   >
-                    <GraduationCap className="h-8 w-8 text-primary" />
+                    <img
+                      src={edu.logo}
+                      alt={edu.institution + ' logo'}
+                      className={`${edu.logoSize} object-contain rounded-lg select-none`}
+                    />
                   </motion.div>
                   <div className="flex-1">
-                    <h3 className="text-foreground mb-2">{edu.degree}</h3>
+                    <h3 className="text-foreground mb-2 font-semibold">
+                      {edu.degree}
+                    </h3>
                     <p className="text-primary mb-2">{edu.institution}</p>
-                    <div className="flex flex-wrap gap-4 text-muted-foreground">
+                    <div className="flex flex-wrap gap-4 text-muted-foreground text-sm">
                       <div className="flex items-center gap-2">
                         <MapPin className="h-4 w-4 text-accent" />
                         <span>{edu.location}</span>
@@ -115,14 +128,14 @@ export function Education() {
                 <div className="mb-6 p-4 bg-gradient-to-r from-primary/5 to-accent/5 rounded-lg border border-primary/20">
                   <div className="flex items-center gap-2 mb-2">
                     <Award className="h-5 w-5 text-primary" />
-                    <h4 className="text-foreground">Specialization</h4>
+                    <h4 className="text-foreground font-medium">Specialization</h4>
                   </div>
                   <p className="text-foreground/90">{edu.focus}</p>
                 </div>
 
                 {/* Achievements */}
                 <div className="mb-6">
-                  <h4 className="text-foreground mb-3">Key Achievements</h4>
+                  <h4 className="text-foreground mb-3 font-medium">Key Achievements</h4>
                   <ul className="space-y-2">
                     {edu.achievements.map((achievement, idx) => (
                       <motion.li
@@ -142,7 +155,7 @@ export function Education() {
 
                 {/* Relevant Courses */}
                 <div>
-                  <h4 className="text-foreground mb-3">Relevant Courses</h4>
+                  <h4 className="text-foreground mb-3 font-medium">Relevant Courses</h4>
                   <div className="flex flex-wrap gap-2">
                     {edu.courses.map((course) => (
                       <Badge
