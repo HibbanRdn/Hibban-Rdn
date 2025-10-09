@@ -46,16 +46,16 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            whileHover={{ scale: 1.05 }}
-            className="text-lg bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent cursor-pointer"
-          >
-            M. Hibban Ramadhan
-          </motion.a>
+  href="#"
+  onClick={(e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }}
+  whileHover={{ scale: 1.05 }}
+  className="text-xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent cursor-pointer"
+>
+  {"</>"}
+</motion.a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
