@@ -67,7 +67,7 @@ export function Hero() {
             className="mb-4"
           >
             <span className="inline-block px-4 py-2 bg-gradient-to-r from-primary/20 to-accent/20 text-primary border border-primary/30 rounded-full mb-4 backdrop-blur-sm">
-              M. Hibban Ramadhan
+              Muhamad Hibban Ramadhan
             </span>
           </motion.div>
 
@@ -77,7 +77,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-4 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]"
           >
-            Informatics Engineering
+            Informatics Engineering Students
           </motion.h1>
 
           <motion.p
