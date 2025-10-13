@@ -77,7 +77,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-4 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]"
           >
-            Informatics Engineering Students
+            Informatics Engineering Student
           </motion.h1>
 
           <motion.p
