@@ -13,6 +13,7 @@ export function Projects() {
       tags: ["Arduino", "Embedded", "Health"],
       image: "/images/3.jpg",
       link: "https://github.com/HibbanRdn/Project-GlucoSense.git",
+      progress: "100%",
     },
     {
       title: "IoT Dashboard",
@@ -21,6 +22,7 @@ export function Projects() {
       tags: ["IoT", "Node.js", "MQTT", "PHP"],
       image: "/images/2.jpg",
       link: "https://github.com/HibbanRdn/IoT-MultiSensorDashboard.git",
+      progress: "100%",
     },
     {
       title: "Junior High School LMS",
@@ -29,6 +31,7 @@ export function Projects() {
       tags: ["LMS", "React", "MongoDB"],
       image: "/images/1.jpg",
       link: "https://vclassnepatro.site",
+      progress: "100%",
     },
   ];
 
@@ -45,126 +48,88 @@ export function Projects() {
   };
 
   return (
-    <section
-      id="projects"
-      className="relative flex flex-col items-center justify-center py-20 px-4 overflow-hidden bg-background text-white"
-    >
-      {/* HEADER */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-16 z-10"
-      >
-        <h2 className="mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent text-3xl md:text-4xl font-bold">
-          Featured Projects
-        </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
+    <section className="projects-section">
+      <div className="max-w-6xl mx-auto relative z-10 text-center mb-16">
+        <div className="header-line" />
+        <h2 className="projects-title">Featured Projects</h2>
+        <p className="projects-subtitle">
           A showcase of my work in AI, Machine Learning, IoT, and Web
           Development
         </p>
-      </motion.div>
+      </div>
 
-      {/* CAROUSEL */}
-      <div className="relative w-full max-w-6xl z-10 flex items-center justify-center">
-        {/* LEFT BUTTON */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-0 md:-left-16 top-1/2 -translate-y-1/2 z-20
-          bg-primary/10 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center
-          backdrop-blur-md transition-all duration-300 hover:scale-110 hover:shadow-[0_0_25px_rgba(0,255,200,0.4)]"
-        >
-          <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-primary relative z-10" />
+      <div className="projects-carousel">
+        {/* gradient fades di sisi */}
+        <div className="side-fade left" aria-hidden />
+        <div className="side-fade right" aria-hidden />
+
+        <button className="carousel-btn left" onClick={prevSlide} aria-label="Previous">
+          <ChevronLeft />
         </button>
 
-        {/* PROJECT CARDS */}
         <motion.div
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           onDragEnd={handleDragEnd}
-          className="relative flex items-center justify-center w-full max-w-5xl 
-          h-[460px] md:h-[480px] cursor-grab active:cursor-grabbing overflow-hidden"
+          className="carousel-track"
         >
           {projects.map((project, index) => {
             const offset = index - activeIndex;
-            const total = projects.length;
-            let translateX = (offset * 340) % (total * 340);
-            let scale = offset === 0 ? 1 : 0.85;
-            let rotateY = offset === 0 ? 0 : offset > 0 ? -18 : 18;
-            let opacity = offset === 0 ? 1 : 0.5;
-            let zIndex = offset === 0 ? 10 : 5;
+            // agar z-index tetap bagus ketika looping
+            const translateX = offset * 340;
+            const scale = offset === 0 ? 1 : 0.85;
+            const rotateY = offset === 0 ? 0 : offset > 0 ? -18 : 18;
+            const opacity = offset === 0 ? 1 : 0.5;
+            const zIndex = offset === 0 ? 10 : 5;
 
             return (
               <motion.div
                 key={index}
-                className="absolute transition-all duration-700 ease-in-out"
+                className="carousel-card"
                 style={{
                   transform: `translateX(${translateX}px) scale(${scale}) rotateY(${rotateY}deg)`,
                   opacity,
                   zIndex,
-                  width: "320px",
-                  background:
-                    "linear-gradient(135deg, rgba(30,41,59,0.85), rgba(15,23,42,0.9))",
-                  borderRadius: "1.2rem",
-                  boxShadow:
-                    offset === 0
-                      ? "0 25px 50px rgba(0,0,0,0.6), 0 0 40px rgba(0,255,200,0.4)"
-                      : "0 15px 25px rgba(0,0,0,0.3)",
                 }}
               >
-                {/* IMAGE */}
-                <div className="relative h-44 md:h-48 overflow-hidden rounded-t-2xl border-b border-primary/20">
-                  <ImageWithFallback
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover rounded-t-2xl transition-transform duration-700 hover:scale-110"
-                  />
+                <div className="card-image">
+                  <ImageWithFallback src={project.image} alt={project.title} />
                 </div>
 
-                {/* CONTENT */}
-                <div className="p-6 text-left">
-                  <h3 className="font-orbitron text-lg mb-2 text-foreground">
-                    {project.title}
-                  </h3>
+                <div className="card-content">
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
 
-                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  {/* TAGS + ICON */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex flex-wrap gap-2">
+                  <div className="card-footer">
+                    <div className="tags">
                       {project.tags.map((tag) => (
-                        <Badge
-                          key={tag}
-                          className="bg-primary/10 border border-primary/30 text-primary text-xs"
-                        >
+                        <Badge key={tag} className="badge">
                           {tag}
                         </Badge>
                       ))}
                     </div>
-
-                    {/* ICON (kanan bawah section tag) */}
                     <a
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Open ${project.title} details`}
-                      className="p-2 transition-all duration-300 hover:scale-110"
+                      aria-label={`Open ${project.title}`}
                     >
-                      <ExternalLink className="w-4 h-5 text-accent hover:text-[#ADFF2F] transition-colors" />
+                      <ExternalLink />
                     </a>
                   </div>
 
-                  {/* PROGRESS BAR */}
-                  <div className="mt-6 h-1 bg-primary/20 rounded overflow-hidden">
+                  <div className="progress-bar" aria-hidden={false}>
                     <motion.div
-                      className="h-full bg-gradient-to-r from-primary to-accent"
+                      className="progress-fill"
                       initial={{ width: 0 }}
-                      animate={{ width: offset === 0 ? "80%" : "40%" }}
+                      animate={{
+                        width: offset === 0 ? project.progress : "40%",
+                      }}
                       transition={{ duration: 1 }}
                     />
+                    <span className="progress-text">
+                      {offset === 0 ? project.progress : ""}
+                    </span>
                   </div>
                 </div>
               </motion.div>
@@ -172,31 +137,237 @@ export function Projects() {
           })}
         </motion.div>
 
-        {/* RIGHT BUTTON */}
-        <button
-          onClick={nextSlide}
-          className="absolute right-0 md:-right-16 top-1/2 -translate-y-1/2 z-20
-          bg-primary/10 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center
-          backdrop-blur-md transition-all duration-300 hover:scale-110 hover:shadow-[0_0_25px_rgba(0,255,200,0.4)]"
-        >
-          <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-primary relative z-10" />
+        <button className="carousel-btn right" onClick={nextSlide} aria-label="Next">
+          <ChevronRight />
         </button>
       </div>
 
-      {/* INDICATORS */}
-      <div className="flex justify-center gap-2 mt-12 md:mt-16 z-10">
+      <div className="carousel-indicators">
         {projects.map((_, index) => (
           <div
             key={index}
+            className={`indicator ${index === activeIndex ? "active" : ""}`}
             onClick={() => setActiveIndex(index)}
-            className={`w-6 h-1 rounded cursor-pointer transition-all ${
-              index === activeIndex
-                ? "bg-gradient-to-r from-primary to-accent shadow-[0_0_10px_rgba(0,255,200,0.7)]"
-                : "bg-primary/20"
-            }`}
+            role="button"
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
+
+      <style>{`
+        /* ---------- SECTION & HEADERS ---------- */
+        .projects-section {
+          padding: 80px 20px;
+          background-color: #0A0E27;
+          color: #f8fafc;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .projects-title {
+          font-size: 2.25rem;
+          font-weight: 300;
+          background: linear-gradient(90deg,rgb(255, 255, 255),rgb(0, 238, 107));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          margin-bottom: 16px;
+          position: relative;
+        }
+
+        .projects-subtitle {
+          color: #94a3b8;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        /* ---------- CAROUSEL WRAPPER ---------- */
+        .projects-carousel {
+          position: relative;
+          width: 100%;
+          max-width: 1000px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* tombol navigasi */
+        .carousel-btn {
+          z-index: 40;
+          border: none;
+          background: rgba(56,189,248,0.08);
+          border: 1px solid rgba(56,189,248,0.2);
+          width: 20px;
+          height: 30px;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          backdrop-filter: blur(4px);
+          transition: transform .18s ease, box-shadow .18s ease;
+        }
+        .carousel-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(56,189,248,0.12); }
+        .carousel-btn.left { margin-right: 12px; }
+        .carousel-btn.right { margin-left: 12px; }
+
+        /* ---------- TRACK & CARDS ---------- */
+        .carousel-track {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          cursor: grab;
+          height: 480px;
+          width: 100%;
+          position: relative;
+        }
+
+        .carousel-card {
+          position: absolute;
+          width: 320px;
+          background: rgba(17,25,40,0.5);
+          border: 1px solid rgba(56,189,248,0.2);
+          border-radius: 1.2rem;
+          backdrop-filter: blur(8px);
+          box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+          overflow: hidden;
+          transition: all 0.5s ease;
+        }
+
+        .carousel-card:hover {
+          transform: translateY(-5px);
+          border-color: rgba(56,189,248,0.4);
+          box-shadow:
+            0 8px 15px rgba(56,189,248,0.15),
+            0 12px 25px rgba(0,255,136,0.12);
+          transition: all 0.4s ease;
+        }
+
+        .card-image {
+          height: 192px;
+          overflow: hidden;
+        }
+
+        .card-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.6s ease;
+        }
+
+        .card-image img:hover {
+          transform: scale(1.1);
+        }
+
+        .card-content {
+          padding: 24px;
+        }
+
+        .card-content h3 {
+          font-family: 'Orbitron', sans-serif;
+          font-size: 1.125rem;
+          color: #f1f5f9;
+          margin-bottom: 8px;
+        }
+
+        .card-content p {
+          color: #94a3b8;
+          font-size: 0.875rem;
+          margin-bottom: 16px;
+        }
+
+        .card-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        /* ---------- TAGS (Badge) STYLE ---------- */
+        .tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        /* jika Badge meneruskan className, akan terkena style ini */
+        .badge {
+          background: rgba(0, 230, 255, 0.06);
+          border: 1px solid rgba(0, 230, 255, 0.28);
+          color: #67e8f9;
+          font-family: 'Orbitron', sans-serif;
+          font-size: 0.78rem;
+          border-radius: 9999px;
+          padding: 6px 12px;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+          box-shadow: 0 0 6px rgba(56,189,248,0.06), inset 0 1px 0 rgba(255,255,255,0.02);
+        }
+
+        .badge:hover {
+          background: rgba(0, 230, 255, 0.12);
+          border-color: rgba(56,189,248,0.48);
+          box-shadow: 0 6px 18px rgba(56,189,248,0.12);
+          transform: translateY(-2px);
+        }
+
+        /* ---------- PROGRESS BAR ---------- */
+        .progress-bar {
+          margin-top: 18px;
+          height: 6px;
+          background: rgba(56,189,248,0.06);
+          border-radius: 999px;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .progress-fill {
+          height: 100%;
+          background: linear-gradient(90deg,#ffffff, #21FF9C);
+          border-radius: 999px;
+          box-shadow: 0 4px 14px rgba(33,255,156,0.06);
+          transition: width 0.6s cubic-bezier(.2,.9,.2,1);
+        }
+
+        .progress-text {
+          position: absolute;
+          top: -22px;
+          right: 0;
+          font-size: 0.75rem;
+          font-family: 'Orbitron', sans-serif;
+          color: #00ffae;
+          text-shadow: 0 0 8px rgba(0,255,128,0.45);
+          transition: all 0.3s ease;
+        }
+
+        /* ---------- INDICATORS ---------- */
+        .carousel-indicators {
+          display: flex;
+          gap: 8px;
+          margin-top: 32px;
+        }
+
+        .indicator {
+          width: 24px;
+          height: 4px;
+          border-radius: 2px;
+          background: rgba(56,189,248,0.12);
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+          background: linear-gradient(90deg,rgb(255, 255, 255),rgb(57, 242, 76));
+          box-shadow: 0 0 10px rgba(56,189,248,0.8);
+          transform: scale(1.08);
+        }
+
+        
+      `}</style>
     </section>
   );
 }
