@@ -1,112 +1,201 @@
-import { motion } from "motion/react";
-import { Card } from "./ui/card";
+import { useState } from "react";
+import { motion, PanInfo } from "motion/react";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { Badge } from "./ui/badge";
-import { ExternalLink } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function Projects() {
   const projects = [
-    // {
-    //   title: "Machine Learning Models",
-    //   description: "Advanced ML models for predictive analytics and pattern recognition using TensorFlow and scikit-learn.",
-    //   tags: ["Python", "TensorFlow", "scikit-learn"],
-    //   image: "https://images.unsplash.com/photo-1717501219263-9aa2d6a768d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWNoaW5lJTIwbGVhcm5pbmclMjBuZXVyYWwlMjBuZXR3b3JrfGVufDF8fHx8MTc1OTgyMjc3NHww&ixlib=rb-4.1.0&q=80&w=1080",
-    // },
-    // {
-    //   title: "Data Mining Analysis",
-    //   description: "Comprehensive data mining project analyzing large datasets to extract valuable insights and trends.",
-    //   tags: ["Python", "Pandas", "Data Analysis"],
-    //   image: "https://images.unsplash.com/photo-1740908900846-4bbd4f22c975?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhJTIwbWluaW5nJTIwYW5hbHlzaXN8ZW58MXx8fHwxNzU5OTEzNDYxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    // },
-    // {
-    //   title: "Neural Networks Experiments",
-    //   description: "Deep learning experiments with various neural network architectures for image and text processing.",
-    //   tags: ["Deep Learning", "PyTorch", "CNN"],
-    //   image: "https://images.unsplash.com/photo-1719550371336-7bb64b5cacfa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZXVyYWwlMjBuZXR3b3JrJTIwYnJhaW58ZW58MXx8fHwxNzU5ODQ1NjExfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    // },
     {
       title: "GlucoSense",
-      description: "Embedded system project for real-time blood sugar monitoring using sensors and microcontrollers.",
-      tags: ["Arduino", "IoT", "Healthcare"],
+      description:
+        "Embedded system project for real-time blood sugar monitoring using sensors and microcontrollers.",
+      tags: ["Arduino", "Embedded", "Health"],
       image: "/images/3.jpg",
+      link: "https://github.com/HibbanRdn/Project-GlucoSense.git",
     },
     {
       title: "IoT Dashboard",
-      description: "HTTP-based monitoring system for IoT devices with real-time data visualization and alerts.",
-      tags: ["IoT", "Node.js", "MQTT"],
+      description:
+        "HTTP-based monitoring system for IoT devices with real-time data visualization and alerts.",
+      tags: ["IoT", "Node.js", "MQTT", "PHP"],
       image: "/images/2.jpg",
+      link: "https://github.com/HibbanRdn/IoT-MultiSensorDashboard.git",
     },
     {
       title: "Junior High School LMS",
-      description: "Learning Management System designed for junior high schools with course management and student tracking.",
-      tags: ["React", "Node.js", "MongoDB"],
+      description:
+        "Learning Management System designed for junior high schools with course management and student tracking.",
+      tags: ["LMS", "React", "MongoDB"],
       image: "/images/1.jpg",
+      link: "https://vclassnepatro.site",
     },
   ];
 
-  return (
-    <section id="projects" className="py-20 px-4 bg-background relative">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_30%,rgba(57,255,20,0.05),transparent_50%)]" />
-      
-      <div className="max-w-6xl mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Featured Projects
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            A showcase of my work in AI, Machine Learning, IoT, and Web Development
-          </p>
-        </motion.div>
+  const [activeIndex, setActiveIndex] = useState(0);
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
-              className="group"
-            >
-              <Card className="overflow-hidden h-full bg-card/50 backdrop-blur-sm border border-primary/20 hover:border-primary/50 transition-all duration-300 shadow-lg hover:shadow-primary/20 hover:shadow-xl">
-                <div className="relative overflow-hidden aspect-video">
+  const prevSlide = () =>
+    setActiveIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
+  const nextSlide = () =>
+    setActiveIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
+
+  const handleDragEnd = (_: any, info: PanInfo) => {
+    if (info.offset.x < -100) nextSlide();
+    if (info.offset.x > 100) prevSlide();
+  };
+
+  return (
+    <section
+      id="projects"
+      className="relative flex flex-col items-center justify-center py-20 px-4 overflow-hidden bg-background text-white"
+    >
+      {/* HEADER */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16 z-10"
+      >
+        <h2 className="mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent text-3xl md:text-4xl font-bold">
+          Featured Projects
+        </h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          A showcase of my work in AI, Machine Learning, IoT, and Web
+          Development
+        </p>
+      </motion.div>
+
+      {/* CAROUSEL */}
+      <div className="relative w-full max-w-6xl z-10 flex items-center justify-center">
+        {/* LEFT BUTTON */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-0 md:-left-16 top-1/2 -translate-y-1/2 z-20
+          bg-primary/10 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center
+          backdrop-blur-md transition-all duration-300 hover:scale-110 hover:shadow-[0_0_25px_rgba(0,255,200,0.4)]"
+        >
+          <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-primary relative z-10" />
+        </button>
+
+        {/* PROJECT CARDS */}
+        <motion.div
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          onDragEnd={handleDragEnd}
+          className="relative flex items-center justify-center w-full max-w-5xl 
+          h-[460px] md:h-[480px] cursor-grab active:cursor-grabbing overflow-hidden"
+        >
+          {projects.map((project, index) => {
+            const offset = index - activeIndex;
+            const total = projects.length;
+            let translateX = (offset * 340) % (total * 340);
+            let scale = offset === 0 ? 1 : 0.85;
+            let rotateY = offset === 0 ? 0 : offset > 0 ? -18 : 18;
+            let opacity = offset === 0 ? 1 : 0.5;
+            let zIndex = offset === 0 ? 10 : 5;
+
+            return (
+              <motion.div
+                key={index}
+                className="absolute transition-all duration-700 ease-in-out"
+                style={{
+                  transform: `translateX(${translateX}px) scale(${scale}) rotateY(${rotateY}deg)`,
+                  opacity,
+                  zIndex,
+                  width: "320px",
+                  background:
+                    "linear-gradient(135deg, rgba(30,41,59,0.85), rgba(15,23,42,0.9))",
+                  borderRadius: "1.2rem",
+                  boxShadow:
+                    offset === 0
+                      ? "0 25px 50px rgba(0,0,0,0.6), 0 0 40px rgba(0,255,200,0.4)"
+                      : "0 15px 25px rgba(0,0,0,0.3)",
+                }}
+              >
+                {/* IMAGE */}
+                <div className="relative h-44 md:h-48 overflow-hidden rounded-t-2xl border-b border-primary/20">
                   <ImageWithFallback
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover rounded-t-2xl transition-transform duration-700 hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                    <div className="flex items-center gap-2 text-primary">
-                      <ExternalLink className="h-5 w-5" />
-                      <span>View Details</span>
-                    </div>
-                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="mb-2 text-foreground group-hover:text-primary transition-colors">{project.title}</h3>
-                  <p className="text-muted-foreground mb-4">
+
+                {/* CONTENT */}
+                <div className="p-6 text-left">
+                  <h3 className="font-orbitron text-lg mb-2 text-foreground">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="bg-primary/10 text-primary border border-primary/30">
-                        {tag}
-                      </Badge>
-                    ))}
+
+                  {/* TAGS + ICON */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <Badge
+                          key={tag}
+                          className="bg-primary/10 border border-primary/30 text-primary text-xs"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+
+                    {/* ICON (kanan bawah section tag) */}
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Open ${project.title} details`}
+                      className="p-2 transition-all duration-300 hover:scale-110"
+                    >
+                      <ExternalLink className="w-4 h-5 text-accent hover:text-[#ADFF2F] transition-colors" />
+                    </a>
+                  </div>
+
+                  {/* PROGRESS BAR */}
+                  <div className="mt-6 h-1 bg-primary/20 rounded overflow-hidden">
+                    <motion.div
+                      className="h-full bg-gradient-to-r from-primary to-accent"
+                      initial={{ width: 0 }}
+                      animate={{ width: offset === 0 ? "80%" : "40%" }}
+                      transition={{ duration: 1 }}
+                    />
                   </div>
                 </div>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* RIGHT BUTTON */}
+        <button
+          onClick={nextSlide}
+          className="absolute right-0 md:-right-16 top-1/2 -translate-y-1/2 z-20
+          bg-primary/10 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center
+          backdrop-blur-md transition-all duration-300 hover:scale-110 hover:shadow-[0_0_25px_rgba(0,255,200,0.4)]"
+        >
+          <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-primary relative z-10" />
+        </button>
+      </div>
+
+      {/* INDICATORS */}
+      <div className="flex justify-center gap-2 mt-12 md:mt-16 z-10">
+        {projects.map((_, index) => (
+          <div
+            key={index}
+            onClick={() => setActiveIndex(index)}
+            className={`w-6 h-1 rounded cursor-pointer transition-all ${
+              index === activeIndex
+                ? "bg-gradient-to-r from-primary to-accent shadow-[0_0_10px_rgba(0,255,200,0.7)]"
+                : "bg-primary/20"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );
