@@ -9,7 +9,8 @@ export function Experiences() {
       title: "AI Research Assistant",
       company: "Universitas Lampung",
       period: "2024 - Present",
-      description: "Conducting research on machine learning models and neural networks for predictive analytics. Contributing to academic publications and assisting in AI-related projects.",
+      description:
+        "Conducting research on machine learning models and neural networks for predictive analytics. Contributing to academic publications and assisting in AI-related projects.",
       technologies: ["Python", "TensorFlow", "PyTorch", "Scikit-learn"],
       type: "Research",
     },
@@ -17,7 +18,8 @@ export function Experiences() {
       title: "IoT Developer Intern",
       company: "Tech Innovation Lab",
       period: "2023 - 2024",
-      description: "Developed HTTP-based IoT monitoring systems and embedded solutions for healthcare applications. Worked on the GlucoSense project for blood sugar monitoring.",
+      description:
+        "Developed HTTP-based IoT monitoring systems and embedded solutions for healthcare applications. Worked on the GlucoSense project for blood sugar monitoring.",
       technologies: ["Arduino", "ESP32", "MQTT", "Node.js"],
       type: "Internship",
     },
@@ -25,26 +27,28 @@ export function Experiences() {
       title: "Web Development Freelancer",
       company: "Self-Employed",
       period: "2023 - Present",
-      description: "Building custom web applications and learning management systems for educational institutions. Focus on creating responsive and user-friendly interfaces.",
+      description:
+        "Building custom web applications and learning management systems for educational institutions. Focus on creating responsive and user-friendly interfaces.",
       technologies: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
       type: "Freelance",
     },
   ];
 
   return (
-    <section id="experiences" className="py-20 px-4 bg-background relative">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,255,255,0.05),transparent_50%)]" />
-      
+    <section id="experiences" className="py-20 px-4 bg-background relative overflow-hidden">
+      {/* Header section */}
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 relative"
         >
-          <h2 className="mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          {/* Decorative blurred gradient line behind header (same style as Achievements) */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-primary/30 via-accent/30 to-primary/30 blur-sm opacity-60" />
+          
+          <h2 className="mb-4 relative bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-semibold text-3xl">
             Experiences
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -111,9 +115,7 @@ export function Experiences() {
                       ))}
                     </div>
 
-                    <Badge
-                      className="mt-4 bg-gradient-to-r from-accent/20 to-primary/20 text-accent border border-accent/30"
-                    >
+                    <Badge className="mt-4 bg-gradient-to-r from-accent/20 to-primary/20 text-accent border border-accent/30">
                       {exp.type}
                     </Badge>
                   </Card>
