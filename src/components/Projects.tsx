@@ -22,7 +22,7 @@ export function Projects() {
       tags: ["IoT", "Node.js", "MQTT", "PHP"],
       image: "/images/2.jpg",
       link: "https://github.com/HibbanRdn/IoT-MultiSensorDashboard.git",
-      progress: "100%",
+      progress: "79%",
     },
     {
       title: "Junior High School LMS",
