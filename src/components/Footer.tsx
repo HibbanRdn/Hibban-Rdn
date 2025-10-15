@@ -8,6 +8,7 @@ export function Footer() {
     { name: "About", href: "#about" },
     { name: "Projects", href: "#projects" },
     { name: "Skills", href: "#skills" },
+    { name: "Achievements", href: "#achievements" },
     { name: "Certificates", href: "#certificates" },
     { name: "Contact", href: "#contact" },
   ];
@@ -20,10 +21,15 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-[#0f1729] to-[#0a0e27] border-t border-cyan-500/20 py-12 px-4 relative">
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
-      
+    <footer className="relative bg-gradient-to-t from-[#0f1729] to-[#0a0e27] py-12 px-4 overflow-hidden">
+      {/* Animated Background Grid like Hero */}
+      <div className="absolute inset-0
+        bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),
+            linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)]
+        bg-[size:50px_50px]
+        opacity-30
+      " />
+
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
@@ -77,7 +83,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-cyan-500/20 pt-8 text-center text-gray-400">
+        <div className="pt-8 text-center text-gray-400">
           <p>© {currentYear} M. Hibban Ramadhan. All rights reserved.</p>
           <p className="mt-2 text-gray-500">Built with React & Tailwind CSS</p>
         </div>
