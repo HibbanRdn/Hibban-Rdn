@@ -1,80 +1,57 @@
 import { motion } from "motion/react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { Trophy, Star, Award, Target } from "lucide-react";
+import { Trophy, Award, Code2Icon, StarHalfIcon, StarIcon } from "lucide-react";
 
 export function Achievements() {
-const achievements = [
-  {
-    icon: Trophy,
-    title: "Cisco CCNA Cyber Ops Certified",
-    description:
-      "Successfully obtained professional certification in cybersecurity operations and network security from Cisco Networking Academy.",
-    category: "Certification",
-    year: "2024",
-    color: "from-yellow-500 to-orange-500",
-  },
-  {
-    icon: Award,
-    title: "Oracle Database Certified",
-    description:
-      "Earned Oracle Database 12c: SQL Fundamentals certification, demonstrating expertise in database management.",
-    category: "Certification",
-    year: "2023",
-    color: "from-red-500 to-pink-500",
-  },
-  {
-    icon: Trophy,
-    title: "Smart Wearable IoT Project",
-    description:
-      "Developed GlucoSense, an IoT-based wearable system for blood sugar monitoring and early diabetes detection.",
-    category: "Project",
-    year: "2024",
-    color: "from-green-500 to-emerald-500",
-  },
-  {
-    icon: Star,
-    title: "Community Service at Junior High School",
-    description:
-      "Contributed to school community service by teaching and sharing knowledge at my former junior high school.",
-    category: "Community",
-    year: "2024",
-    color: "from-blue-500 to-indigo-500",
-  },
-  {
-    icon: Target,
-    title: "Math Olympiad Mentor",
-    description:
-      "Guided and mentored high school students in preparing for mathematics olympiad competitions.",
-    category: "Mentorship",
-    year: "2023–2024",
-    color: "from-purple-500 to-pink-500",
-  },
-  {
-    icon: Award,
-    title: "AI Research Contributor",
-    description:
-      "Active contributor to AI research group at Universitas Lampung, focusing on neural networks and machine learning experiments.",
-    category: "Research",
-    year: "2024",
-    color: "from-cyan-500 to-blue-500",
-  },
-];
+  const achievements = [
+    {
+      icon: Code2Icon,
+      title: "Open Source Contributor",
+      description:
+        "Contributed to multiple GitHub projects, including bug fixes, feature improvements, and documentation for IoT and embedded systems repositories.",
+      category: "Contribution",
+      year: "2024",
+      color: "from-purple-500 to-pink-400",
+    },
+    {
+      icon: Trophy,
+      title: "Silver Medal - Mathematics Olympiad",
+      description:
+        "Achieved silver medal in a university-level mathematics olympiad, showcasing strong analytical and problem-solving skills.",
+      category: "Award",
+      year: "2023",
+      color: "from-yellow-500 to-orange-400",
+    },
+    {
+      icon: StarIcon,
+      title: "IoT Mini Project Showcase",
+      description:
+        "Presented mini-projects on ESP32-based IoT solutions in university exhibitions, demonstrating practical skills in hardware-software integration.",
+      category: "Project",
+      year: "2023",
+      color: "from-red-500 to-pink-400",
+    },
+  ];
 
   return (
     <section id="achievements" className="py-20 px-4 bg-background relative">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,255,0.03),transparent_50%)]" />
+
       
       <div className="max-w-6xl mx-auto relative z-10">
+        {/* Header section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 relative"
         >
-          <h2 className="mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          {/* Optional decorative line behind header */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-primary/30 via-accent/30 to-primary/30 blur-sm opacity-60" />
+
+          <h2 className="mb-4 relative bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent text-3xl md:text-4xl font-bold">
             Achievements
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -82,6 +59,7 @@ const achievements = [
           </p>
         </motion.div>
 
+        {/* Achievements grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {achievements.map((achievement, index) => (
             <motion.div
@@ -124,39 +102,6 @@ const achievements = [
             </motion.div>
           ))}
         </div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
-        >
-          {[
-            { label: "Certifications", value: "2+", icon: Award },
-            { label: "Projects Completed", value: "6+", icon: Trophy },
-            { label: "Technologies", value: "15+", icon: Star },
-            { label: "Current Semester", value: "5th", icon: Target },
-          ].map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-            >
-              <Card className="p-6 text-center bg-card/30 backdrop-blur-sm border border-primary/20 hover:border-accent/50 transition-all duration-300">
-                <stat.icon className="h-8 w-8 text-primary mx-auto mb-3" />
-                <div className="mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  {stat.value}
-                </div>
-                <p className="text-muted-foreground">{stat.label}</p>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
