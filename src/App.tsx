@@ -4,7 +4,7 @@ import { About } from "./components/About";
 import { Projects } from "./components/Projects";
 import { Experiences } from "./components/Experiences";
 import { Skills } from "./components/Skills";
-import { Education } from "./components/Education";
+import {Education} from "./components/Education";
 import { Achievements } from "./components/Achievements";
 import { Certificates } from "./components/Certificates";
 import { Contact } from "./components/Contact";
@@ -21,6 +21,7 @@ export default function App() {
       <Skills />
       <Education />
       <Achievements />
+      <Certificates />
       <Contact />
       <Footer />
     </div>
